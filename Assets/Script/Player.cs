@@ -13,10 +13,14 @@ public class Player : MonoBehaviour
     private float horizontal;
 
     //public component
-    public Transform groundCheck;
+    public Transform groundCheck1;
+    public GameObject groundCheckStanding;
+    public Transform groundCheck2;
+    public GameObject groundCheckCrouching;
     public Rigidbody2D rb;
     public LayerMask groundLayer;
     public BoxCollider2D col;
+    public Animator anim;
 
     //public Vector2
     public Vector2 StandingSize;
@@ -47,12 +51,16 @@ public class Player : MonoBehaviour
             isJumping = true;
         }
 
+        ///////////////////////////////////////////////////Code pour s'accroupir///////////////////////////////////////////////////
+
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             isStanding = false;
             isCrouching =true;
             col.size = CrouchingSize;
             col.offset = CrouchingOffSet;
+            groundCheckStanding.SetActive(false);
+            groundCheckCrouching.SetActive(true);
         }
 
 
@@ -62,13 +70,28 @@ public class Player : MonoBehaviour
             isStanding = true;
             col.size = StandingSize;
             col.offset = StandingOffSet;
+            groundCheckStanding.SetActive(true);
+            groundCheckCrouching.SetActive(false);
+
         }
 
+        if (isCrouching)
+        {
+            anim.SetBool("isCrouching", true);
+        }
+        else
+        {
+            anim.SetBool("isCrouching", false);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
     void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        if (!isCrouching) isGrounded = Physics2D.OverlapCircle(groundCheck1.position, 0.1f, groundLayer); 
+        else isGrounded = Physics2D.OverlapCircle(groundCheck2.position, 0.1f, groundLayer);
+        
         float horizontal = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
 
         MovePlayer(horizontal);
@@ -77,7 +100,8 @@ public class Player : MonoBehaviour
 
     void MovePlayer(float _horizontal)
     {
- 
+        ///////////////////////////////////////////////////Code pour s'accroupir///////////////////////////////////////////////////
+
         if (isJumping && isStanding)
         {
             //forcemode2d.impulse ajoute direct une impulsion au rigidbody
@@ -90,6 +114,8 @@ public class Player : MonoBehaviour
             rb.AddForce(new Vector2(0f, jumpForceCrouching));
             isJumping = false;
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 
 }
