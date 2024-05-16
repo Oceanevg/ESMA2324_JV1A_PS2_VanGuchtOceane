@@ -80,7 +80,8 @@ public class Player : MonoBehaviour
  
         if (isJumping && isStanding)
         {
-            rb.AddForce(new Vector2(0f, jumpForceStanding));
+            //forcemode2d.impulse ajoute direct une impulsion au rigidbody
+            rb.AddForce(Vector2.up * jumpForceStanding, ForceMode2D.Impulse);
             isJumping = false;
         }
 
