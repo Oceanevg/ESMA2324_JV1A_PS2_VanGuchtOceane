@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
 
     //public component
     public Transform groundCheck1;
+
     public GameObject groundCheckStanding;
     public Transform groundCheck2;
     public GameObject groundCheckCrouching;
@@ -21,6 +22,8 @@ public class Player : MonoBehaviour
     public LayerMask groundLayer;
     public BoxCollider2D col;
     public Animator anim;
+    //public GameObject CheckRight;
+    //public GameObject CheckLeft;
 
     //Formule pour aller chercher dans d'autres scripts
     public Projectile projectilePrefab;
@@ -32,11 +35,12 @@ public class Player : MonoBehaviour
     public Vector2 CrouchingSize;
     public Vector2 CrouchingOffSet;
 
-    //public bool
-    public bool isJumping;
-    public bool isGrounded;
-    public bool isStanding;
-    public bool isCrouching;
+    //SerializeField private bool
+    [SerializeField] private bool isJumping;
+    [SerializeField] private bool isGrounded;
+    [SerializeField] private bool isStanding;
+    [SerializeField] private bool isCrouching;
+    [SerializeField] private bool isFacingRight = true;
 
 
     private void Start()
@@ -48,17 +52,20 @@ public class Player : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         transform.Translate(Vector2.right * horizontal * moveSpeed * Time.deltaTime);
-     
+
+        Flip();
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             isJumping = true;
         }
 
-        if (Input.GetButtonDown("SlimeBall"))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Instantiate(projectilePrefab, LaunchOffSet.position, transform.rotation);
+          
         }
+
 
 
 
@@ -108,6 +115,7 @@ public class Player : MonoBehaviour
 
         MovePlayer(horizontal);
 
+       
     }
 
     void MovePlayer(float _horizontal)
@@ -128,6 +136,18 @@ public class Player : MonoBehaviour
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    }
+
+    private void Flip()
+    {
+
+        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
+        }
     }
 
 }
