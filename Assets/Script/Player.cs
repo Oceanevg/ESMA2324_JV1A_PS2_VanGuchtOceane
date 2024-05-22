@@ -22,6 +22,10 @@ public class Player : MonoBehaviour
     public BoxCollider2D col;
     public Animator anim;
 
+    //Formule pour aller chercher dans d'autres scripts
+    public Projectile projectilePrefab;
+    public Transform LaunchOffSet;
+
     //public Vector2
     public Vector2 StandingSize;
     public Vector2 StandingOffSet;
@@ -50,6 +54,14 @@ public class Player : MonoBehaviour
         {
             isJumping = true;
         }
+
+        if (Input.GetButtonDown("SlimeBall"))
+        {
+            Instantiate(projectilePrefab, LaunchOffSet.position, transform.rotation);
+        }
+
+
+
 
         ///////////////////////////////////////////////////Code pour s'accroupir///////////////////////////////////////////////////
 
