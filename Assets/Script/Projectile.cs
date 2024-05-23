@@ -4,7 +4,7 @@ public class Projectile : MonoBehaviour
 {
     public float speed;
     public float spawn;
-    float temps;
+    public float temps;
 
     private GameObject player;
     private GameObject launch;
@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
         launch = GameObject.FindGameObjectWithTag("Launch");
 
         rb.velocity = (launch.transform.position - player.transform.position).normalized * speed;
-        Debug.Log("AAAAAh" + rb.velocity.x);
+        
         temps = spawn;
 
     }
