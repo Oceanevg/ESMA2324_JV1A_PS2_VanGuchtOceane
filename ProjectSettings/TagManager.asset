@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Launch
+  - Door1
   layers:
   - Default
   - TransparentFX
@@ -12,7 +13,7 @@ TagManager:
   - ground
   - Water
   - UI
-  - 
+  - door1
   - 
   - 
   - 

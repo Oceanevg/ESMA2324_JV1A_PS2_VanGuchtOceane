@@ -42,6 +42,10 @@ public class Player : MonoBehaviour
     [SerializeField] private bool isCrouching;
     [SerializeField] private bool isFacingRight = true;
 
+    //public bool
+    public bool HasKey1 = false;
+    public bool HasKey2 = false;
+
 
     private void Start()
     {
@@ -66,6 +70,7 @@ public class Player : MonoBehaviour
           
         }
 
+       
 
 
 
@@ -104,6 +109,16 @@ public class Player : MonoBehaviour
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    }
+
+    public void GetKey1()
+    {
+        HasKey1 = true;
+    }
+
+    public void GetKey2()
+    {
+        HasKey2 = true;
     }
 
     void FixedUpdate()
