@@ -41,6 +41,11 @@ public class EnemyMovement : MonoBehaviour
         {
             Destroy(objectToDestroy);
         }
+
+        if (collision.CompareTag("Projectile"))
+        {
+            Destroy(objectToDestroy);
+        }
     }
 
 

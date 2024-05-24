@@ -8,6 +8,7 @@ TagManager:
   - Door1
   - repere
   - enemy
+  - Projectile
   layers:
   - Default
   - TransparentFX

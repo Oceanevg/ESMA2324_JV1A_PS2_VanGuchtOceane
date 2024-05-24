@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     public float moveSpeed;
     public float jumpForceStanding;
     public float jumpForceCrouching;
+    public float cd;
+
+    
 
     //private float
     private float horizontal;
@@ -45,6 +48,7 @@ public class Player : MonoBehaviour
     //public bool
     public bool HasKey1 = false;
     public bool HasKey2 = false;
+    public bool cdAtteinte = true;
 
 
     private void Start()
@@ -52,6 +56,7 @@ public class Player : MonoBehaviour
         isStanding = true;
     }
 
+   
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
@@ -64,10 +69,9 @@ public class Player : MonoBehaviour
             isJumping = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && cdAtteinte)
         {
-            Instantiate(projectilePrefab, LaunchOffSet.position, transform.rotation);
-          
+            StartCoroutine(Shoot());
         }
 
        
@@ -109,6 +113,16 @@ public class Player : MonoBehaviour
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    }
+
+
+    //faire une coroutine pour mettre du temps entre chacun de mes lancés
+    IEnumerator Shoot()
+    {
+        cdAtteinte = false;
+        Instantiate(projectilePrefab, LaunchOffSet.position, transform.rotation);
+        yield return new WaitForSeconds(cd);
+        cdAtteinte = true;
     }
 
     public void GetKey1()

@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PrefabBouleEnemy: {fileID: 8627938505896627344, guid: 44d9864ab80f8c747a7efcadaa0086ef, type: 3}
-  SpawnBoule: {fileID: 0}
+  SpawnBoule: {fileID: 8051983396296355756, guid: c5fe9d6aacab45b46a77c1ca77b3aacc, type: 3}
+  objectToDestroy: {fileID: 5970770470634506665}
   cooldown: 1
   temps: 1

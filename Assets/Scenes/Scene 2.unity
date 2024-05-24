@@ -310,6 +310,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 126428571463083184, guid: 8d8670bb423c5fa44a0cd7a7a0df6b40, type: 3}
+      propertyPath: m_Color.b
+      value: 0.11307406
+      objectReference: {fileID: 0}
+    - target: {fileID: 126428571463083184, guid: 8d8670bb423c5fa44a0cd7a7a0df6b40, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 126428571463083184, guid: 8d8670bb423c5fa44a0cd7a7a0df6b40, type: 3}
+      propertyPath: m_Color.r
+      value: 0.20251453
+      objectReference: {fileID: 0}
     - target: {fileID: 1626282397951050048, guid: 8d8670bb423c5fa44a0cd7a7a0df6b40, type: 3}
       propertyPath: m_UsedByEffector
       value: 1
@@ -1147,6 +1159,10 @@ PrefabInstance:
       propertyPath: SpawnBoule
       value: 
       objectReference: {fileID: 1782720238}
+    - target: {fileID: 2600308285557171986, guid: 5535eed73c6080a45a9e5000c7ba7512, type: 3}
+      propertyPath: objectToDestroy
+      value: 
+      objectReference: {fileID: 1851058880}
     - target: {fileID: 5970770470634506665, guid: 5535eed73c6080a45a9e5000c7ba7512, type: 3}
       propertyPath: m_Name
       value: StaticEnemy
@@ -1156,6 +1172,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5535eed73c6080a45a9e5000c7ba7512, type: 3}
+--- !u!1 &1851058880 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5970770470634506665, guid: 5535eed73c6080a45a9e5000c7ba7512, type: 3}
+  m_PrefabInstance: {fileID: 1851058879}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

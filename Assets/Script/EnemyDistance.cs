@@ -6,7 +6,8 @@ public class EnemyDistance : MonoBehaviour
 {
     public GameObject PrefabBouleEnemy;
     public Transform SpawnBoule;
-    
+    public GameObject objectToDestroy;
+
     public float cooldown;
 
     public bool temps = true;
@@ -27,5 +28,14 @@ public class EnemyDistance : MonoBehaviour
     public void cdChange()
     {
         temps = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.CompareTag("Projectile"))
+        {
+            Destroy(objectToDestroy);
+        }
     }
 }

@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     private GameObject player;
     private GameObject launch;
     private Rigidbody2D rb;
+    
 
 
     private void Awake()
@@ -16,14 +17,13 @@ public class Projectile : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player");
         launch = GameObject.FindGameObjectWithTag("Launch");
+        
 
         //gameObject sans maj pour nous meme, sinon player c'est pour la fonction player, et le GameObject avec maj c'est pour aller chercher ailleurs jcrois
         Physics2D.IgnoreCollision(player.GetComponent <Collider2D>(), gameObject.GetComponent<Collider2D>());
         rb = gameObject.GetComponent<Rigidbody2D>();
 
-        player = GameObject.FindGameObjectWithTag("Player");
-        launch = GameObject.FindGameObjectWithTag("Launch");
-
+        
         rb.velocity = (launch.transform.position - player.transform.position).normalized * speed;
         
         temps = spawn;
