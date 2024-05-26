@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
     public bool HasKey1 = false;
     public bool HasKey2 = false;
     public bool cdAtteinte = true;
+    public bool canStand = true;
 
 
     private void Start()
@@ -92,7 +93,7 @@ public class Player : MonoBehaviour
         }
 
 
-        if (Input.GetKeyUp(KeyCode.DownArrow))
+        if (Input.GetKeyUp(KeyCode.DownArrow) && canStand == true)
         {
             isCrouching = false;
             isStanding = true;
@@ -112,7 +113,25 @@ public class Player : MonoBehaviour
             anim.SetBool("isCrouching", false);
         }
 
+       
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "cantStand")
+        {
+            canStand = false;
+        }  
+    }
+
+    public void OnTriggerExit2D(Collider2D leave)
+    {
+        if (leave.gameObject.tag == "cantStand")
+        {
+            canStand = true;
+        }
     }
 
 

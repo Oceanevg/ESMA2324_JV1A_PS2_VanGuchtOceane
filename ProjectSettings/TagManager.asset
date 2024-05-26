@@ -9,6 +9,7 @@ TagManager:
   - repere
   - enemy
   - Projectile
+  - cantStand
   layers:
   - Default
   - TransparentFX
