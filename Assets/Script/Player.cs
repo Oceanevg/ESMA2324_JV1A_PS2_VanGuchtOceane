@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
     //public bool
     public bool HasKey1 = false;
     public bool HasKey2 = false;
+    public bool HasKey3 = false;
     public bool cdAtteinte = true;
     public bool canStand = true;
 
@@ -152,6 +153,11 @@ public class Player : MonoBehaviour
     public void GetKey2()
     {
         HasKey2 = true;
+    }
+
+    public void GetKey3()
+    {
+        HasKey3 = true;
     }
 
     void FixedUpdate()

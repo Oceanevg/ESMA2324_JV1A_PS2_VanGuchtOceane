@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyFly : MonoBehaviour
+public class FlyBoss : MonoBehaviour
 {
     public GameObject player;
     public GameObject objectToDestroy;
@@ -12,7 +10,13 @@ public class EnemyFly : MonoBehaviour
 
     private float distance;
 
+    public GameObject PrefabBouleEnemy;
+    public Transform SpawnBoule;
+    
 
+    public float cooldown;
+
+    public bool temps = true;
 
     private void Awake()
     {
@@ -38,7 +42,21 @@ public class EnemyFly : MonoBehaviour
             //L'ennemi va aller vers la position donnée (le joueur)
             transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
         }
+
+        if (temps == true)
+        {
+            temps = false;
+            var bouleEnemy = Instantiate(PrefabBouleEnemy, SpawnBoule.position, SpawnBoule.rotation);
+            Invoke("cdChange", cooldown);
+        }
     }
+
+
+    public void cdChange()
+    {
+        temps = true;
+    }
+
 
 
     private void OnTriggerEnter2D(Collider2D collision)
