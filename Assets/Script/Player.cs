@@ -10,23 +10,23 @@ public class Player : MonoBehaviour
     public float jumpForceCrouching;
     public float cd;
 
-    
+    public int PointDeVie = 2;
+
 
     //private float
     private float horizontal;
 
     //public component
     public Transform groundCheck1;
-
-    public GameObject groundCheckStanding;
     public Transform groundCheck2;
+    public GameObject groundCheckStanding;
     public GameObject groundCheckCrouching;
     public Rigidbody2D rb;
     public LayerMask groundLayer;
     public BoxCollider2D col;
     public Animator anim;
-    //public GameObject CheckRight;
-    //public GameObject CheckLeft;
+    public Animator healthBar;
+    
 
     //Formule pour aller chercher dans d'autres scripts
     public Projectile projectilePrefab;
@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
    
     void Update()
     {
+        //Les mouvements de base
         horizontal = Input.GetAxisRaw("Horizontal");
         transform.Translate(Vector2.right * horizontal * moveSpeed * Time.deltaTime);
 
@@ -121,14 +122,31 @@ public class Player : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+
+        //si on est dans un endroit trop petit, on ne peut pas se relever
         if (collision.gameObject.tag == "cantStand")
         {
             canStand = false;
-        }  
+        }
+
+        //code pour la vie
+        if (collision.gameObject.layer == 6)
+        {
+            PointDeVie -= 1;
+            if (PointDeVie == 1)
+            {
+                healthBar.Play("UnCoeur");
+            }
+            else if (PointDeVie <= 0)
+            {
+                healthBar.Play("ZeroCoeur");
+            }
+        }
     }
 
     public void OnTriggerExit2D(Collider2D leave)
     {
+        //si on sort de la zonne etroite on peut de nouveau se relever 
         if (leave.gameObject.tag == "cantStand")
         {
             canStand = true;
@@ -145,6 +163,8 @@ public class Player : MonoBehaviour
         cdAtteinte = true;
     }
 
+
+    ///////////////////////////////////////////////////LES CLÉS///////////////////////////////////////////////////
     public void GetKey1()
     {
         HasKey1 = true;
@@ -159,9 +179,11 @@ public class Player : MonoBehaviour
     {
         HasKey3 = true;
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     void FixedUpdate()
     {
+        //differenciation accroupi/debout
         if (!isCrouching) isGrounded = Physics2D.OverlapCircle(groundCheck1.position, 0.1f, groundLayer); 
         else isGrounded = Physics2D.OverlapCircle(groundCheck2.position, 0.1f, groundLayer);
         

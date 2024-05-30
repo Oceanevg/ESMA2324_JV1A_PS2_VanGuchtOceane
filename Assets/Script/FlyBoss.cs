@@ -2,51 +2,22 @@ using UnityEngine;
 
 public class FlyBoss : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject PrefabBouleBoss;
+    public Transform SpawnBouleBoss;
     public GameObject objectToDestroy;
-
-    public float speed;
-    public float distanceBetween;
-
-    private float distance;
-
-    public GameObject PrefabBouleEnemy;
-    public Transform SpawnBoule;
-    
 
     public float cooldown;
 
     public bool temps = true;
 
-    private void Awake()
-    {
-        player = GameObject.FindWithTag("Player");
-    }
+
 
     private void Update()
     {
-        // prends la distance entre les deux fonctions et va le retourner dans la fonction distance
-        distance = Vector2.Distance(transform.position, player.transform.position);
-        Vector2 direction = player.transform.position - transform.position;
-        //On normalise la direction, ça va garder la direction et garder la longueur à 1
-        direction.Normalize();
-        //fonction pour trouver l'angle entre 2 points
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; //on transforme de radian à degrés
-
-
-        //Code pour que l'ennemi nous chasse seulement quand on est à une certaines distance
-        if (distance < distanceBetween)
-        {
-            transform.rotation = Quaternion.Euler(Vector3.forward * angle);
-
-            //L'ennemi va aller vers la position donnée (le joueur)
-            transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
-        }
-
         if (temps == true)
         {
             temps = false;
-            var bouleEnemy = Instantiate(PrefabBouleEnemy, SpawnBoule.position, SpawnBoule.rotation);
+            var bouleEnemy = Instantiate(PrefabBouleBoss, SpawnBouleBoss.position, SpawnBouleBoss.rotation);
             Invoke("cdChange", cooldown);
         }
     }
@@ -56,8 +27,6 @@ public class FlyBoss : MonoBehaviour
     {
         temps = true;
     }
-
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
