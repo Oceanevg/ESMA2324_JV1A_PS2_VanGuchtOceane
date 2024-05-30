@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
         }
 
        
-
+        
 
 
 
@@ -155,6 +155,9 @@ public class Player : MonoBehaviour
 
 
     //faire une coroutine pour mettre du temps entre chacun de mes lancés
+
+  
+
     IEnumerator Shoot()
     {
         cdAtteinte = false;
